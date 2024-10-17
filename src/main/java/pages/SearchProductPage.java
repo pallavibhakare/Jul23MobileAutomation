@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import utils.CommonUtils;
 import utils.FileUtils;
 import utils.WaitUtils;
 
@@ -34,9 +35,9 @@ public class SearchProductPage extends BasePage {
 	public List<WebElement> productsListed;
 
 	
-//	@iOSXCUITFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.solodroid.solomerce:id/product_name\" and @text=\"Scientific Calculator - Doraemon 350 MS\"]")
-//	@AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.solodroid.solomerce:id/product_name\" and @text=\"Scientific Calculator - Doraemon 350 MS\"]")
-//	public WebElement item;
+	@iOSXCUITFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.solodroid.solomerce:id/product_name\" and @text=\"Scientific Calculator - Doraemon 350 MS\"]")
+	@AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.solodroid.solomerce:id/product_name\" and @text=\"Scientific Calculator - Doraemon 350 MS\"]")
+	public WebElement aItemAtBottom;
 	
 	@iOSXCUITFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.solodroid.solomerce:id/product_name\" and @text=\"Apple watch series 3 GPS 42mm Black\"]")
 	@AndroidFindBy(xpath = "//android.widget.TextView[@resource-id=\"com.solodroid.solomerce:id/product_name\" and @text=\"Apple watch series 3 GPS 42mm Black\"]")
@@ -101,16 +102,8 @@ public class SearchProductPage extends BasePage {
 			return false;
 		}
 	}
-	public String addProductToCart(AndroidDriver driver) throws FileNotFoundException, IOException, InterruptedException {
+	public void addToCartBtnAction(AndroidDriver driver) throws FileNotFoundException, IOException {
 		String numberOfProducts=FileUtils.readAppTestDataPropertiesFile("numberOfItemsToAddInTheCart");
-		//System.out.println("itemCount: "+itemCount);	
-		WaitUtils.explicitWaitForElementsVisibility(driver, item);
-				
-//		CommonUtils.scrollUntilElementIsVisible(driver, item);
-		
-		String itemTxt = item.getText();
-		item.click();	
-		logger.info(itemTxt+" is clicked.");
 		String addToCartBtnTxt = addToCartBtn.getText();
 		addToCartBtn.click();
 		logger.info("'"+addToCartBtnTxt+"' button is clicked.");
@@ -120,6 +113,27 @@ public class SearchProductPage extends BasePage {
 		logger.info("'"+numberOfProducts+"' products are entered.");
 		numOfOrderAdd.click();
 		logger.info("'ADD' button is clicked.");
+	}
+	public String addProductToCart(AndroidDriver driver) throws FileNotFoundException, IOException, InterruptedException {
+//		String numberOfProducts=FileUtils.readAppTestDataPropertiesFile("numberOfItemsToAddInTheCart");
+		//System.out.println("itemCount: "+itemCount);	
+		WaitUtils.explicitWaitForElementsVisibility(driver, item);
+				
+//		CommonUtils.scrollUntilElementIsVisible(driver, item);
+		
+		String itemTxt = item.getText();
+		item.click();	
+		logger.info(itemTxt+" is clicked.");
+//		String addToCartBtnTxt = addToCartBtn.getText();
+//		addToCartBtn.click();
+//		logger.info("'"+addToCartBtnTxt+"' button is clicked.");
+//		WaitUtils.explicitWaitForElementsVisibility(driver, userInputDialogTitle);
+//		numOfOrderInput.click();		
+//		numOfOrderInput.sendKeys(numberOfProducts);
+//		logger.info("'"+numberOfProducts+"' products are entered.");
+//		numOfOrderAdd.click();
+//		logger.info("'ADD' button is clicked.");
+		addToCartBtnAction(driver);
 		cartView.click();	
 		logger.info("'Cart' button is clicked.");
 		if(shoppingCart.isDisplayed()) {

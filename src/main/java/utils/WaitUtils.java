@@ -5,11 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 
 public class WaitUtils {
 	
-	public static void explicitWaitForElementsVisibility(AndroidDriver driver, WebElement elementToWait) {
+	public static void explicitWaitForElementsVisibility(AppiumDriver driver, WebElement elementToWait) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		wait.until(ExpectedConditions.visibilityOf(elementToWait));
 	}

@@ -25,8 +25,7 @@ import io.appium.java_client.service.local.flags.GeneralServerFlag;
 
 
 public class BaseTest {
-	 File appiumLogFile = new File("C:/Users/Pal/Desktop/appium.log");
-	 
+	
 	public static AppiumDriver driver ;
 	AppiumDriverLocalService service;
 	
@@ -40,13 +39,6 @@ public class BaseTest {
 	
 	@BeforeSuite(alwaysRun = true)
 	public void getReport() throws Exception {	
-
-//		extent = ReportManager.getInstance();
-//	    if (extent == null) {
-//	        logger.error("Failed to initialize ExtentReports instance.");
-//	    } else {
-//	        logger.info("ExtentReports instance initialized successfully.");
-//	    }
 		extent = new ExtentReports();
 		ExtentSparkReporter sparkReporter = new ExtentSparkReporter(FileConstants.REPORTS_FILE_PATH);
 		extent.attachReporter(sparkReporter);
@@ -55,12 +47,6 @@ public class BaseTest {
 	public void flushReport() {
 	    extent.flush();
 	}
-//	@BeforeMethod
-//    public void setupReport(Method method) {
-//        ExtentTest testInstance = extent.createTest(method.getName());
-//        threadTest.set(testInstance); 
-//        logger.info("Test started: " + method.getName());
-//    }
 
     @AfterMethod
     public void tearDown() {
@@ -74,7 +60,7 @@ public class BaseTest {
     	AppiumDriverLocalService service = AppiumDriverLocalService.buildService(
     		    new AppiumServiceBuilder()
     		        .usingPort(4723)
-    		        .withIPAddress("127.0.0.1") // Specify to bind only to localhost
+    		        .withIPAddress("127.0.0.1") 
     		        .withArgument(GeneralServerFlag.LOG_LEVEL, "debug")
     		);
     	service.start();
@@ -89,23 +75,6 @@ public class BaseTest {
 //	    	try {
 //	    	service.start();
 //	    	logger.info("Attempting to start Appium server...");
-//
-//	    	// Polling for server readiness
-//	        for (int i = 0; i < 20; i++) { // Try for 20 seconds
-//	            if (service.isRunning()) {
-//	                logger.info("Appium server started successfully.");
-//	                return; // Server started successfully
-//	            }
-//	            Thread.sleep(1000); // Check every second
-//	        }
-//	        
-//	        logger.error("Appium server did not start within the timeout period.");
-//	        throw new RuntimeException("Appium server failed to start.");
-//	        
-//		    } catch (Exception e) {
-//		        logger.error("Failed to start Appium server: " + e.getMessage());
-//		        throw e; // Ensure the error is propagated
-//		    }
 		}
 	    @AfterClass
 	    public void stopServer() {
@@ -114,12 +83,10 @@ public class BaseTest {
 	            service.stop();
 	           
 	        }
-//	    	service.build().stop();
 	    }
 	
 	public static AppiumDriver getDriver(String driverType) throws MalformedURLException {
 		driverType = driverType.toLowerCase();
-//		AppiumDriver driver;
 		switch(driverType) {
 		case "android":		
 			try {		

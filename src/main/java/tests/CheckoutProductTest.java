@@ -2,13 +2,7 @@ package tests;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Duration;
-import java.util.Arrays;
 
-import org.openqa.selenium.interactions.PointerInput;
-import org.openqa.selenium.interactions.Sequence;
-import org.openqa.selenium.interactions.PointerInput.Kind;
-import org.openqa.selenium.interactions.PointerInput.Origin;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,13 +13,12 @@ import com.aventstack.extentreports.Status;
 
 import io.appium.java_client.android.AndroidDriver;
 import listeners.TestListener;
-import pages.SearchProductPage;
+import pages.CheckoutProductPage;
 import utils.FileUtils;
 
 @Listeners(TestListener.class)
-public class SearchProductTest extends BaseTest{
-
-	public SearchProductPage sp;
+public class CheckoutProductTest extends BaseTest{
+	public CheckoutProductPage cpp;
 	public AndroidDriver driver;
 	
 	@BeforeMethod
@@ -47,16 +40,11 @@ public class SearchProductTest extends BaseTest{
 		 }
 	}
 	
-	@Test(description = "Search a Product")
-	public void searchProductTest_TC01() throws FileNotFoundException, IOException {
-		sp = new SearchProductPage(driver);
-		logger.info("SearchProductTest : searchProductTest_TC01");
-		String searchItem = FileUtils.readAppTestDataPropertiesFile("searchItem");
-		sp.searchAItem(driver, searchItem);		
-		Assert.assertTrue(sp.isSearchedProductsView(driver, searchItem));
-		test.log(Status.INFO, "Suggested Products are listed.");
+	@Test(description = "Checkout Product")
+	public void checkoutProductTest_TC03() throws FileNotFoundException, IOException {
+		cpp = new CheckoutProductPage(driver);
+		cpp.checkoutProduct(driver);
+		Assert.assertTrue(cpp.isCategoryView(driver));
+		test.log(Status.INFO, "Chekout is done. Back to 'Category'.");
 	}
-	
-	
-	
 }
