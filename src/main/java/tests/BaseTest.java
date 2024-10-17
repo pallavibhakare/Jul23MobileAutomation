@@ -1,6 +1,5 @@
 package tests;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import org.apache.logging.log4j.LogManager;

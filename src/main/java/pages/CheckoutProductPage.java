@@ -16,7 +16,7 @@ public class CheckoutProductPage  extends BasePage{
 	public CheckoutProductPage(WebDriver driver) {
 		super((AndroidDriver) driver);
 	}
-		
+	
 	@iOSXCUITFindBy(accessibility = "new UiSelector().text(\"Gold Titanium Diamond Women's Bracelet\")")
 	@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Gold Titanium Diamond Women's Bracelet\")")
 	public WebElement fashionItem;
@@ -84,12 +84,10 @@ public class CheckoutProductPage  extends BasePage{
 		driver.hideKeyboard();
 //		WaitUtils.explicitWaitForElementsVisibility(driver, processCheckoutBtn);
 		processCheckoutBtn.click();
-		if(buttonPanel.isDisplayed()){
+		
 			yesBtn.click();
 			WaitUtils.explicitWaitForElementsVisibility(driver, yesBtn);
-		}else {
-			logger.atError();
-		}
+		
 		WaitUtils.explicitWaitForElementsVisibility(driver, alterCongratsMessage);
 		alterOkBtn.click();
 		

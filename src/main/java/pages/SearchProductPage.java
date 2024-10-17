@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import utils.CommonUtils;
 import utils.FileUtils;
 import utils.WaitUtils;
 

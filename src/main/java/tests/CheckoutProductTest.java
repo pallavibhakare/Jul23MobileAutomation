@@ -14,11 +14,13 @@ import com.aventstack.extentreports.Status;
 import io.appium.java_client.android.AndroidDriver;
 import listeners.TestListener;
 import pages.CheckoutProductPage;
+import pages.OrderHistoryPage;
 import utils.FileUtils;
 
 @Listeners(TestListener.class)
 public class CheckoutProductTest extends BaseTest{
 	public CheckoutProductPage cpp;
+	public OrderHistoryPage ohp;
 	public AndroidDriver driver;
 	
 	@BeforeMethod
@@ -47,4 +49,10 @@ public class CheckoutProductTest extends BaseTest{
 		Assert.assertTrue(cpp.isCategoryView(driver));
 		test.log(Status.INFO, "Chekout is done. Back to 'Category'.");
 	}
+	
+//	@Test(description = "Order History of Product", dependsOnMethods = "checkoutProductTest_TC03")
+//	public void orderHistoryTest_TC04() {
+//		ohp = new OrderHistoryPage(driver);
+//		ohp.orderHistory();
+//	}
 }
